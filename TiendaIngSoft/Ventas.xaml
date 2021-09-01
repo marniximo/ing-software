@@ -1,0 +1,26 @@
+﻿<Window x:Class="TiendaIngSoft.Ventas"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TiendaIngSoft"
+        mc:Ignorable="d"
+        Title="Ventas" Height="450" Width="800"
+        ContentRendered="Window_ContentRendered">
+    <Grid>
+        <Label x:Name="label" Content="Registrar Venta" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top"/>
+        <DataGrid x:Name="dg_carrito" Margin="0,189,0,143" KeyDown="dg_carrito_KeyDown" CanUserDeleteRows="False"/>
+        <Label x:Name="label1" Content="Codigo" HorizontalAlignment="Left" Margin="274,38,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label1_Copy" Content="Talle" HorizontalAlignment="Left" Margin="274,69,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label1_Copy1" Content="Color" HorizontalAlignment="Left" Margin="274,100,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txt_codigo" HorizontalAlignment="Left" Margin="355,42,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txt_talle" HorizontalAlignment="Left" Margin="355,73,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txt_color" HorizontalAlignment="Left" Margin="355,104,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="btn_registrar" Content="Registrar" HorizontalAlignment="Center" Margin="0,302,0,0" VerticalAlignment="Top" Click="btn_registrar_Click"/>
+        <Button x:Name="btn_agregar" Content="Agregar" HorizontalAlignment="Center" Margin="0,164,0,0" VerticalAlignment="Top" Click="btn_agregar_Click"/>
+        <DataGrid x:Name="dg_ventas" Margin="0,327,0,5" CanUserDeleteRows="False"/>
+        <Label x:Name="label1_Copy2" Content="Cantidad" HorizontalAlignment="Left" Margin="274,131,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txt_cantidad" HorizontalAlignment="Left" Margin="355,135,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+
+    </Grid>
+</Window>
