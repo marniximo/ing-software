@@ -1,4 +1,8 @@
 *.dll
 *.pdb
 Modelo/obj
+Modelo/bin
+Modelo/.vs
 TiendaIngSoft/obj/
+TiendaIngSoft/bin/
+TiendaIngSoft/.vs/
