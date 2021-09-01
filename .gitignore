@@ -1,0 +1,4 @@
+*.dll
+*.pdb
+Modelo/obj
+TiendaIngSoft/obj/

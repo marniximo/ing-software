@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Mariano\\source\\repos\\TiendaIngSoft\\TiendaIngSoft.csproj": {}
+    "C:\\Users\\Mariano\\Desktop\\ing-software\\TiendaIngSoft\\TiendaIngSoft.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Mariano\\source\\repos\\Modelo\\Modelo.csproj": {
+    "C:\\Users\\Mariano\\Desktop\\ing-software\\Modelo\\Modelo.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Mariano\\source\\repos\\Modelo\\Modelo.csproj",
+        "projectUniqueName": "C:\\Users\\Mariano\\Desktop\\ing-software\\Modelo\\Modelo.csproj",
         "projectName": "Modelo",
-        "projectPath": "C:\\Users\\Mariano\\source\\repos\\Modelo\\Modelo.csproj",
+        "projectPath": "C:\\Users\\Mariano\\Desktop\\ing-software\\Modelo\\Modelo.csproj",
         "packagesPath": "C:\\Users\\Mariano\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Mariano\\source\\repos\\Modelo\\obj\\",
+        "outputPath": "C:\\Users\\Mariano\\Desktop\\ing-software\\Modelo\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Mariano\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -61,14 +61,14 @@
         }
       }
     },
-    "C:\\Users\\Mariano\\source\\repos\\TiendaIngSoft\\TiendaIngSoft.csproj": {
+    "C:\\Users\\Mariano\\Desktop\\ing-software\\TiendaIngSoft\\TiendaIngSoft.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Mariano\\source\\repos\\TiendaIngSoft\\TiendaIngSoft.csproj",
+        "projectUniqueName": "C:\\Users\\Mariano\\Desktop\\ing-software\\TiendaIngSoft\\TiendaIngSoft.csproj",
         "projectName": "TiendaIngSoft",
-        "projectPath": "C:\\Users\\Mariano\\source\\repos\\TiendaIngSoft\\TiendaIngSoft.csproj",
+        "projectPath": "C:\\Users\\Mariano\\Desktop\\ing-software\\TiendaIngSoft\\TiendaIngSoft.csproj",
         "packagesPath": "C:\\Users\\Mariano\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Mariano\\source\\repos\\TiendaIngSoft\\obj\\",
+        "outputPath": "C:\\Users\\Mariano\\Desktop\\ing-software\\TiendaIngSoft\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Mariano\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -85,8 +85,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\Mariano\\source\\repos\\Modelo\\Modelo.csproj": {
-                "projectPath": "C:\\Users\\Mariano\\source\\repos\\Modelo\\Modelo.csproj"
+              "C:\\Users\\Mariano\\Desktop\\ing-software\\Modelo\\Modelo.csproj": {
+                "projectPath": "C:\\Users\\Mariano\\Desktop\\ing-software\\Modelo\\Modelo.csproj"
               }
             }
           }
