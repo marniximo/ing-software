@@ -19,6 +19,8 @@ namespace TiendaIngSoft
     /// </summary>
     public partial class Productos : Window
     {
+        EspecificacionProducto especificacionSeleccionada;
+
         public Productos()
         {
             InitializeComponent();
@@ -43,20 +45,49 @@ namespace TiendaIngSoft
             dg_producto.ItemsSource = Servidor.listaProductos;
         }
 
+        private void vaciarCamposEspecificacion() {
+            txt_marca.Text = "";
+            txt_descripcion.Text = "";
+            txt_costo.Text = "";
+            txt_margenGanancia.Text = "";
+        }
+
+        private void llenarCamposEspecificacion()
+        {
+            txt_marca.Text = especificacionSeleccionada.Marca;
+            txt_descripcion.Text = especificacionSeleccionada.Descripcion;
+            txt_costo.Text = especificacionSeleccionada.Costo.ToString();
+            txt_margenGanancia.Text = (especificacionSeleccionada.NetoGravado/especificacionSeleccionada.Costo).ToString();
+        }
+
         private void btn_okEspecificacion_Click(object sender, RoutedEventArgs e)
         {
-            var ultimaEspecificacion = Servidor.listaEspecificacionProductos.LastOrDefault();
-            int codigo = ultimaEspecificacion == null ? 1 : ultimaEspecificacion.Codigo + 1;
-            var especificacion = new EspecificacionProducto() {
-                Codigo = codigo,
-                Costo = float.Parse(txt_costo.Text),
-                Descripcion = txt_descripcion.Text,
-                Marca = txt_marca.Text,
-                NetoGravado = float.Parse(txt_netoGravado.Text),
-                Precio = float.Parse(txt_precio.Text)
-            };
-            Servidor.listaEspecificacionProductos.Add(especificacion);
-            refrescarEspecificaciones();
+            if ((string)btn_okEspecificacion.Content == "Crear")
+            {
+                var ultimaEspecificacion = Servidor.listaEspecificacionProductos.LastOrDefault();
+                int codigo = ultimaEspecificacion == null ? 1 : ultimaEspecificacion.Codigo + 1;
+                var porcentaje = float.Parse(txt_margenGanancia.Text);
+                var costo = float.Parse(txt_costo.Text);
+                var neto = (1 + porcentaje / 100) * costo;
+                var precio = neto * 1 + Servidor.IVA_PORC;
+                var especificacion = new EspecificacionProducto()
+                {
+                    Codigo = codigo,
+                    Costo = float.Parse(txt_costo.Text),
+                    Descripcion = txt_descripcion.Text,
+                    Marca = txt_marca.Text,
+                    NetoGravado = neto,
+                    Precio = precio
+                };
+                Servidor.listaEspecificacionProductos.Add(especificacion);
+                refrescarEspecificaciones();
+                vaciarCamposEspecificacion();
+                MessageBox.Show("Producto Creado!");
+            }
+            else {
+                
+                btn_okEspecificacion.Content = "Crear";
+            }
         }
 
         private void btn_okProductos_Click(object sender, RoutedEventArgs e)
@@ -77,6 +108,14 @@ namespace TiendaIngSoft
             };
             Servidor.listaProductos.Add(producto);
             refrescarProductos();
+        }
+
+        private void dg_especificacion_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter && dg_especificacion.SelectedIndex >= 0) {
+                btn_okEspecificacion.Content = "Actualizar";
+                llenarCamposEspecificacion();
+            }
         }
     }
 }

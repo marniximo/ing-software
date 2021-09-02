@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -20,12 +21,13 @@ namespace TiendaIngSoft
     public partial class Ventas : Window
     {
         List<LineaVenta> carrito = new List<LineaVenta>();
+        Cliente cliente;
         public Ventas()
         {
             InitializeComponent();
             refrescarVentas();
             refrescarCarrito();
-            
+            cliente = null;
         }
 
         private void refrescarVentas() {
@@ -132,6 +134,52 @@ namespace TiendaIngSoft
                     refrescarCarrito();
                 }
             }
+        }
+
+        private void volverCliente(object sender, EventArgs e) {
+            this.Show();
+            cliente = Servidor.listaClientes.FirstOrDefault(c => c.CUIT == int.Parse(txt_cuit.Text));
+            if (cliente == null) {
+                MessageBox.Show("Cliente no encontrado!");
+                txt_cuit.Text = "";
+            }
+        }
+
+        private void txt_cuit_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (txt_cuit.Text.Length > 0)
+            {
+                cliente = Servidor.listaClientes.FirstOrDefault(c => c.CUIT == int.Parse(txt_cuit.Text));
+                if (cliente == null)
+                {
+                    var clientes = new Clientes();
+                    clientes.Show();
+                    this.Hide();
+                    clientes.Closed += volverCliente;
+                }
+            }
+        }
+
+        private void cb_condicionTributaria_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                if (cb_condicionTributaria.SelectedIndex != 0)
+                {
+                    txt_cuit.IsEnabled = true;
+                }
+                else
+                {
+                    txt_cuit.IsEnabled = false;
+                }
+            }
+            catch { }
+        }
+
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
     }
 }

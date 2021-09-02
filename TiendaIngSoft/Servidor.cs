@@ -7,14 +7,18 @@ namespace TiendaIngSoft
 {
     public static class Servidor
     {
+        public const float IVA_PORC = 0.21f;
+
         public static List<Usuario> listaUsuarios = new List<Usuario>() {
             new Usuario(){
                 Legajo = 1234,
-                Password = "password"
+                Password = "password",
+                Sucursal = 1
             },
             new Usuario(){
                 Legajo = 5678,
-                Password = "password2"
+                Password = "password2",
+                Sucursal = 1
             }
         };
 
@@ -108,6 +112,15 @@ namespace TiendaIngSoft
             new Talle(){
                 Codigo = 3,
                 Descripcion = "L",
+            }
+        };
+
+        public static List<Cliente> listaClientes = new List<Cliente>()
+        {
+            new Cliente(){
+                CUIT = 12345,
+                Domicilio = "mi casa",
+                RazonSocial = "marianoSA"
             }
         };
     }
