@@ -22,53 +22,55 @@ namespace TiendaIngSoft
             }
         };
 
-        public static List<EspecificacionProducto> listaEspecificacionProductos = new List<EspecificacionProducto>() {
-            new EspecificacionProducto(){
+        public static List<Producto> listaProductos = new List<Producto>() {
+            new Producto(){
                 Codigo = 1,
                 Descripcion = "Cinturon Gucci",
                 Costo = 500,
+                MargenGanancia = 10,
                 Marca = "Gucci",
-                NetoGravado = 600,
-                Precio = 700
+                NetoGravado = 550,
+                Precio = 550*1.21f,
             },
-            new EspecificacionProducto(){
+            new Producto(){
                 Codigo = 2,
                 Descripcion = "Camisa Taverniti",
                 Costo = 5000,
+                MargenGanancia = 10,
                 Marca = "Taverniti",
-                NetoGravado = 6000,
-                Precio = 7000
+                NetoGravado = 5500,
+                Precio = 5500*1.21f
             }
         };
 
-        public static List<Producto> listaProductos = new List<Producto>() {
-            new Producto(){
+        public static List<LineaStock> listaStock = new List<LineaStock>() {
+            new LineaStock(){
                 Codigo = 3,
-                EspecificacionProducto = 1,
+                Producto = 1,
                 Color = 1,
                 Stock = 500,
                 Sucursal = 1,
                 Talle = 1
             },
-            new Producto(){
+            new LineaStock(){
                 Codigo = 4,
-                EspecificacionProducto = 1,
+                Producto = 1,
                 Color = 2,
                 Stock = 200,
                 Sucursal = 1,
                 Talle = 1
             },
-            new Producto(){
+            new LineaStock(){
                 Codigo = 5,
-                EspecificacionProducto = 1,
+                Producto = 1,
                 Color = 1,
                 Stock = 100,
                 Sucursal = 1,
                 Talle = 2
             },
-            new Producto(){
+            new LineaStock(){
                 Codigo = 6,
-                EspecificacionProducto = 2,
+                Producto = 2,
                 Color = 1,
                 Stock = 600,
                 Sucursal = 1,

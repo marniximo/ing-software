@@ -7,9 +7,9 @@ namespace Modelo
     public enum CondicionTributaria
     {
         CF, //Consumidor Final
-        RI,
-        M,
-        E,
-        NR 
+        RI, //Responsable Inscripto
+        M,  //Monotributo
+        E,  //Exento
+        NR  //No Responsable
     }
 }

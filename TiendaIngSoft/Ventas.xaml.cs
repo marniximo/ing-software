@@ -39,16 +39,11 @@ namespace TiendaIngSoft
         {
             dg_carrito.ItemsSource = null;
             dg_carrito.ItemsSource = carrito;
-            try
-            {
-                dg_carrito.Columns[1].Visibility = Visibility.Hidden;
-                dg_carrito.Columns[5].Visibility = Visibility.Hidden;
-            }
-            catch { }
         }
 
         private void btn_registrar_Click(object sender, RoutedEventArgs e)
         {
+
             if (carrito.Count > 0)
             {
                 float total = 0;
@@ -60,6 +55,24 @@ namespace TiendaIngSoft
                     linea.Venta = codigo;
                     linea.Producto.Stock -= linea.Cantidad;
                 }
+                if ( total > 10000 || (string)cb_condicionTributaria.SelectedItem != "CF") {
+                    if (txt_cuit.Text.Length > 0)
+                    {
+                        cliente = Servidor.listaClientes.FirstOrDefault(c => c.CUIT == int.Parse(txt_cuit.Text));
+                        if (cliente == null)
+                        {
+                            var clientes = new Clientes();
+                            clientes.Show();
+                            this.Hide();
+                            clientes.Closed += volverCliente;
+                            return;
+                        }
+                    }
+                    else {
+                        MessageBox.Show("Ingrese CUIT!");
+                        return;
+                    }
+                }
                 var venta = new Venta()
                 {
                     Codigo = codigo,
@@ -68,6 +81,7 @@ namespace TiendaIngSoft
                     Vendedor = Configuracion.UsuarioActual.Legajo
                 };
                 Servidor.listaVentas.Add(venta);
+                MessageBox.Show("Aqui iria una factura");
                 MessageBox.Show("Venta Registrada!");
                 carrito = new List<LineaVenta>();
                 refrescarVentas();
@@ -78,35 +92,27 @@ namespace TiendaIngSoft
             }
         }
 
-        private void Window_ContentRendered(object sender, EventArgs e)
-        {
-            dg_ventas.MinColumnWidth = (dg_ventas.ActualWidth - SystemParameters.VerticalScrollBarWidth) / 4 - 2;
-            dg_carrito.MinColumnWidth = (dg_carrito.ActualWidth - SystemParameters.VerticalScrollBarWidth) / 4 - 2;
-            dg_carrito.Columns[1].Visibility = Visibility.Hidden;
-            dg_carrito.Columns[5].Visibility = Visibility.Hidden;
-        }
-
         private void btn_agregar_Click(object sender, RoutedEventArgs e)
         {
-            var producto = Servidor.listaProductos.FirstOrDefault(p => p.EspecificacionProducto == int.Parse(txt_codigo.Text) 
+            var stock = Servidor.listaStock.FirstOrDefault(p => p.Producto == int.Parse(txt_codigo.Text) 
                                                                         && p.Sucursal           == Configuracion.Sucursal 
                                                                         && p.Color              == int.Parse(txt_color.Text) 
                                                                         && p.Talle              == int.Parse(txt_talle.Text));
-            if (producto != null)
+            if (stock != null)
             {
-                var especificacion = Servidor.listaEspecificacionProductos.FirstOrDefault(e => e.Codigo == producto.EspecificacionProducto);
+                var producto = Servidor.listaProductos.FirstOrDefault(e => e.Codigo == stock.Producto);
                 int cantidad = int.Parse(txt_cantidad.Text);
-                if (producto.Stock >= cantidad)
+                if (stock.Stock >= cantidad)
                 {
                     if (!carrito.Any(c => c.IdProducto == producto.Codigo))
                     {
                         var linea = new LineaVenta()
                         {
                             Cantidad = cantidad,
-                            PrecioUnitario = especificacion.Precio,
+                            PrecioUnitario = producto.Precio,
                             IdProducto = producto.Codigo,
-                            Producto = producto,
-                            Subtotal = especificacion.Precio * cantidad
+                            Producto = stock,
+                            Subtotal = producto.Precio * cantidad
                         };
                         carrito.Add(linea);
                     }
@@ -139,41 +145,11 @@ namespace TiendaIngSoft
         private void volverCliente(object sender, EventArgs e) {
             this.Show();
             cliente = Servidor.listaClientes.FirstOrDefault(c => c.CUIT == int.Parse(txt_cuit.Text));
-            if (cliente == null) {
+            if (cliente == null)
+            {
                 MessageBox.Show("Cliente no encontrado!");
                 txt_cuit.Text = "";
             }
-        }
-
-        private void txt_cuit_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (txt_cuit.Text.Length > 0)
-            {
-                cliente = Servidor.listaClientes.FirstOrDefault(c => c.CUIT == int.Parse(txt_cuit.Text));
-                if (cliente == null)
-                {
-                    var clientes = new Clientes();
-                    clientes.Show();
-                    this.Hide();
-                    clientes.Closed += volverCliente;
-                }
-            }
-        }
-
-        private void cb_condicionTributaria_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            try
-            {
-                if (cb_condicionTributaria.SelectedIndex != 0)
-                {
-                    txt_cuit.IsEnabled = true;
-                }
-                else
-                {
-                    txt_cuit.IsEnabled = false;
-                }
-            }
-            catch { }
         }
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)

@@ -3,28 +3,44 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TiendaIngSoft"
         xmlns:System="clr-namespace:System;assembly=System.Runtime"
         x:Class="TiendaIngSoft.Ventas"
         mc:Ignorable="d"
-        Title="Ventas" Height="675" Width="1200"
-        ContentRendered="Window_ContentRendered">
+        Title="Ventas" Height="675" Width="1200">
     <Grid>
         <Label x:Name="label" Content="Registrar Venta" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top"/>
-        <DataGrid x:Name="dg_carrito" Margin="0,239,0,235" KeyDown="dg_carrito_KeyDown" CanUserDeleteRows="False"/>
+        <ListView x:Name="dg_carrito" Margin="0,239,0,235" KeyDown="dg_carrito_KeyDown">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Producto" DisplayMemberBinding="{Binding Path=IdProducto}" Width="300"/>
+                    <GridViewColumn Header="Precio Unitario" DisplayMemberBinding="{Binding Path=PrecioUnitario}" Width="300"/>
+                    <GridViewColumn Header="Cantidad" DisplayMemberBinding="{Binding Path=Cantidad}" Width="300"/>
+                    <GridViewColumn Header="Subtotal" DisplayMemberBinding="{Binding Path=Subtotal}" Width="300"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
         <Label x:Name="label1" Content="Codigo" HorizontalAlignment="Left" Margin="274,38,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label1_Copy" Content="Talle" HorizontalAlignment="Left" Margin="274,69,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label1_Copy1" Content="Color" HorizontalAlignment="Left" Margin="274,100,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txt_codigo" HorizontalAlignment="Left" Margin="414,42,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="405" PreviewTextInput="NumberValidationTextBox"/>
         <TextBox x:Name="txt_talle" HorizontalAlignment="Left" Margin="414,73,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="405" PreviewTextInput="NumberValidationTextBox"/>
         <TextBox x:Name="txt_color" HorizontalAlignment="Left" Margin="414,104,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="405" PreviewTextInput="NumberValidationTextBox"/>
-        <Button x:Name="btn_registrar" Content="Registrar" HorizontalAlignment="Center" Margin="0,429,0,0" VerticalAlignment="Top" Click="btn_registrar_Click" PreviewTextInput="NumberValidationTextBox"/>
+        <Button x:Name="btn_registrar" Content="Registrar" HorizontalAlignment="Center" Margin="0,439,0,0" VerticalAlignment="Top" Click="btn_registrar_Click" PreviewTextInput="NumberValidationTextBox"/>
         <Button x:Name="btn_agregar" Content="Agregar" HorizontalAlignment="Left" Margin="855,214,0,0" VerticalAlignment="Top" Click="btn_agregar_Click"/>
-        <DataGrid x:Name="dg_ventas" Margin="0,454,0,5" CanUserDeleteRows="False"/>
+        <ListView x:Name="dg_ventas" Margin="0,464,0,10">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Codigo" DisplayMemberBinding="{Binding Path=Codigo}" Width="300"/>
+                    <GridViewColumn Header="Fecha" DisplayMemberBinding="{Binding Path=Fecha}" Width="300"/>
+                    <GridViewColumn Header="Total" DisplayMemberBinding="{Binding Path=Total}" Width="300"/>
+                    <GridViewColumn Header="Vendedor" DisplayMemberBinding="{Binding Path=Vendedor}" Width="300"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
         <Label x:Name="label1_Copy2" Content="Cantidad" HorizontalAlignment="Left" Margin="274,131,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txt_cantidad" HorizontalAlignment="Left" Margin="414,135,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="405"/>
         <Label x:Name="label1_Copy3" Content="Condicion tributaria" HorizontalAlignment="Left" Margin="274,162,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="cb_condicionTributaria" HorizontalAlignment="Left" Margin="414,166,0,0" Text="" VerticalAlignment="Top" Width="405" SelectedIndex="0" SelectionChanged="cb_condicionTributaria_SelectionChanged">
+        <ComboBox x:Name="cb_condicionTributaria" HorizontalAlignment="Left" Margin="414,166,0,0" Text="" VerticalAlignment="Top" Width="405" SelectedIndex="0">
             <System:String>CF</System:String>
             <System:String>RI</System:String>
             <System:String>M</System:String>
@@ -32,7 +48,7 @@
             <System:String>NR</System:String>
         </ComboBox>
         <Label x:Name="label1_Copy4" Content="CUIT" HorizontalAlignment="Left" Margin="274,193,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txt_cuit" HorizontalAlignment="Left" Margin="414,197,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="405" LostFocus="txt_cuit_LostFocus" IsEnabled="False" PreviewTextInput="NumberValidationTextBox"/>
+        <TextBox x:Name="txt_cuit" HorizontalAlignment="Left" Margin="414,197,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="405" PreviewTextInput="NumberValidationTextBox"/>
 
     </Grid>
 </Window>

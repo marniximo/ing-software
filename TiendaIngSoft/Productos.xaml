@@ -7,16 +7,16 @@
         mc:Ignorable="d"
         Title="Productos" Height="675" Width="1200">
     <Grid>
-        <Label x:Name="label" Content="Especificaciones de Producto" HorizontalAlignment="Left" Margin="10,15,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label" Content="Productos" HorizontalAlignment="Left" Margin="10,15,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label_Copy" Content="Descripcion" HorizontalAlignment="Left" Margin="10,43,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label_Copy1" Content="Marca " HorizontalAlignment="Left" Margin="10,74,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label_Copy2" Content="Costo " HorizontalAlignment="Left" Margin="10,105,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label_Copy3" Content="Margen Ganancia " HorizontalAlignment="Left" Margin="10,136,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txt_descripcion" HorizontalAlignment="Left" Margin="118,47,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="465"/>
-        <TextBox x:Name="txt_costo" HorizontalAlignment="Left" Margin="118,109,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="233"/>
-        <TextBox x:Name="txt_margenGanancia" HorizontalAlignment="Left" Margin="118,140,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="233"/>
-        <TextBox x:Name="txt_marca" HorizontalAlignment="Left" Margin="118,76,0,0" VerticalAlignment="Top" Width="233"/>
-        <ListView x:Name="dg_especificacion" Margin="10,224,634,10" KeyDown="dg_especificacion_KeyDown">
+        <TextBox x:Name="txt_costo" HorizontalAlignment="Left" Margin="118,109,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="233" PreviewTextInput="NumberValidationTextBox"/>
+        <TextBox x:Name="txt_margenGanancia" HorizontalAlignment="Left" Margin="118,140,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="233" PreviewTextInput="NumberValidationTextBox"/>
+        <TextBox x:Name="txt_marca" HorizontalAlignment="Left" Margin="118,76,0,0" VerticalAlignment="Top" Width="233" />
+        <ListView x:Name="dg_productos" Margin="10,224,634,10" KeyDown="dg_productos_KeyDown">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Codigo" DisplayMemberBinding="{Binding Path=Codigo}" Width="50"/>
@@ -27,20 +27,30 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <ListView x:Name="dg_producto" Margin="622,224,10,10"/>
-        <Label x:Name="label_Copy5" Content="Productos" HorizontalAlignment="Left" Margin="625,15,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label_Copy6" Content="Especificacion de Producto" HorizontalAlignment="Left" Margin="626,41,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label_Copy7" Content="Color " HorizontalAlignment="Left" Margin="626,74,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label_Copy8" Content="Talle " HorizontalAlignment="Left" Margin="626,105,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label_Copy9" Content="Sucursal " HorizontalAlignment="Left" Margin="626,136,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label_Copy10" Content="Cantidad " HorizontalAlignment="Left" Margin="626,167,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txt_especificacion" HorizontalAlignment="Left" Margin="801,47,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="276"/>
-        <TextBox x:Name="txt_cantidad" HorizontalAlignment="Left" Margin="801,171,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="276"/>
-        <ComboBox x:Name="cmb_color" HorizontalAlignment="Left" Margin="801,76,0,0" VerticalAlignment="Top" Width="276"/>
-        <ComboBox x:Name="cmb_talle" HorizontalAlignment="Left" Margin="801,107,0,0" VerticalAlignment="Top" Width="276"/>
-        <ComboBox x:Name="cmb_sucursal" HorizontalAlignment="Left" Margin="801,136,0,0" VerticalAlignment="Top" Width="276"/>
-        <Button x:Name="btn_okEspecificacion" Content="Crear" HorizontalAlignment="Left" Margin="281,194,0,0" VerticalAlignment="Top" Click="btn_okEspecificacion_Click" Width="70"/>
-        <Button x:Name="btn_okProductos" Content="Aceptar" HorizontalAlignment="Left" Margin="1007,199,0,0" VerticalAlignment="Top" Click="btn_okProductos_Click" Width="70"/>
+        <ListView x:Name="dg_stock" Margin="622,224,10,10">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Producto" DisplayMemberBinding="{Binding Path=Producto}" Width="100"/>
+                    <GridViewColumn Header="Color" DisplayMemberBinding="{Binding Path=Color}" Width="100"/>
+                    <GridViewColumn Header="Talle" DisplayMemberBinding="{Binding Path=Talle}" Width="100"/>
+                    <GridViewColumn Header="Sucursal" DisplayMemberBinding="{Binding Path=Sucursal}" Width="100"/>
+                    <GridViewColumn Header="Stock" DisplayMemberBinding="{Binding Path=Stock}" Width="150"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Label x:Name="label_Copy5" Content="LineasDeStock" HorizontalAlignment="Left" Margin="625,15,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_Copy6" Content="Codigo de Producto" HorizontalAlignment="Left" Margin="620,38,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_Copy7" Content="Color " HorizontalAlignment="Left" Margin="620,71,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_Copy8" Content="Talle " HorizontalAlignment="Left" Margin="620,102,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_Copy9" Content="Sucursal " HorizontalAlignment="Left" Margin="620,133,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_Copy10" Content="Cantidad " HorizontalAlignment="Left" Margin="620,164,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txt_producto" HorizontalAlignment="Left" Margin="795,44,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="276" PreviewTextInput="NumberValidationTextBox"/>
+        <TextBox x:Name="txt_cantidad" HorizontalAlignment="Left" Margin="795,168,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="276" PreviewTextInput="NumberValidationTextBox"/>
+        <ComboBox x:Name="cmb_color" HorizontalAlignment="Left" Margin="795,73,0,0" VerticalAlignment="Top" Width="276"/>
+        <ComboBox x:Name="cmb_talle" HorizontalAlignment="Left" Margin="795,104,0,0" VerticalAlignment="Top" Width="276"/>
+        <ComboBox x:Name="cmb_sucursal" HorizontalAlignment="Left" Margin="795,133,0,0" VerticalAlignment="Top" Width="276"/>
+        <Button x:Name="btn_okProductos" Content="Crear" HorizontalAlignment="Left" Margin="281,194,0,0" VerticalAlignment="Top" Click="btn_okProductos_Click" Width="70"/>
+        <Button x:Name="btn_okStock" Content="Aceptar" HorizontalAlignment="Left" Margin="1001,194,0,0" VerticalAlignment="Top" Width="70" Click="btn_okStock_Click"/>
 
     </Grid>
 </Window>

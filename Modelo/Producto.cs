@@ -7,10 +7,11 @@ namespace Modelo
     public class Producto
     {
         public int Codigo { get; set; }
-        public int EspecificacionProducto { get; set; }
-        public int Color { get; set; }
-        public int Talle { get; set; }
-        public int Sucursal { get; set; }
-        public int Stock { get; set; }
+        public string Descripcion { get; set; }
+        public string Marca { get; set; }
+        public float Costo { get; set; }
+        public float NetoGravado { get; set; }
+        public float Precio { get; set; }
+        public float MargenGanancia { get; set; }
     }
 }
