@@ -23,8 +23,8 @@
         <Label x:Name="label1_Copy" Content="Talle" HorizontalAlignment="Left" Margin="274,69,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label1_Copy1" Content="Color" HorizontalAlignment="Left" Margin="274,100,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txt_codigo" HorizontalAlignment="Left" Margin="414,42,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="405" PreviewTextInput="NumberValidationTextBox"/>
-        <TextBox x:Name="txt_talle" HorizontalAlignment="Left" Margin="414,73,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="405" PreviewTextInput="NumberValidationTextBox"/>
-        <TextBox x:Name="txt_color" HorizontalAlignment="Left" Margin="414,104,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="405" PreviewTextInput="NumberValidationTextBox"/>
+        <ComboBox x:Name="cmb_talle" HorizontalAlignment="Left" Margin="414,73,0,0" Text="" VerticalAlignment="Top" Width="405" PreviewTextInput="NumberValidationTextBox"/>
+        <ComboBox x:Name="cmb_color" HorizontalAlignment="Left" Margin="414,104,0,0" Text="" VerticalAlignment="Top" Width="405" PreviewTextInput="NumberValidationTextBox"/>
         <Button x:Name="btn_registrar" Content="Registrar" HorizontalAlignment="Center" Margin="0,439,0,0" VerticalAlignment="Top" Click="btn_registrar_Click" PreviewTextInput="NumberValidationTextBox"/>
         <Button x:Name="btn_agregar" Content="Agregar" HorizontalAlignment="Left" Margin="855,214,0,0" VerticalAlignment="Top" Click="btn_agregar_Click"/>
         <ListView x:Name="dg_ventas" Margin="0,464,0,10">

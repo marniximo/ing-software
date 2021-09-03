@@ -25,6 +25,10 @@ namespace TiendaIngSoft
         public Ventas()
         {
             InitializeComponent();
+            cmb_color.ItemsSource = Servidor.listaColores;
+            cmb_color.DisplayMemberPath = "Descripcion";
+            cmb_talle.ItemsSource = Servidor.listaTalles;
+            cmb_talle.DisplayMemberPath = "Descripcion";
             refrescarVentas();
             refrescarCarrito();
             cliente = null;
@@ -47,18 +51,16 @@ namespace TiendaIngSoft
             if (carrito.Count > 0)
             {
                 float total = 0;
-                var ultimaVenta = Servidor.listaVentas.LastOrDefault();
-                var codigo = ultimaVenta == null ? 1 : ultimaVenta.Codigo + 1;
                 foreach (var linea in carrito)
                 {
                     total += linea.Subtotal;
-                    linea.Venta = codigo;
+                    //linea.Venta = codigo;
                     linea.Producto.Stock -= linea.Cantidad;
                 }
                 if ( total > 10000 || (string)cb_condicionTributaria.SelectedItem != "CF") {
                     if (txt_cuit.Text.Length > 0)
                     {
-                        cliente = Servidor.listaClientes.FirstOrDefault(c => c.CUIT == int.Parse(txt_cuit.Text));
+                        cliente = GestorBaseDeDatos.BuscarCliente(int.Parse(txt_cuit.Text));
                         if (cliente == null)
                         {
                             var clientes = new Clientes();
@@ -73,14 +75,7 @@ namespace TiendaIngSoft
                         return;
                     }
                 }
-                var venta = new Venta()
-                {
-                    Codigo = codigo,
-                    Fecha = DateTime.Now,
-                    Total = total,
-                    Vendedor = Configuracion.UsuarioActual.Legajo
-                };
-                Servidor.listaVentas.Add(venta);
+                GestorBaseDeDatos.AgregarVenta(total, Configuracion.UsuarioActual);
                 MessageBox.Show("Aqui iria una factura");
                 MessageBox.Show("Venta Registrada!");
                 carrito = new List<LineaVenta>();
@@ -94,13 +89,10 @@ namespace TiendaIngSoft
 
         private void btn_agregar_Click(object sender, RoutedEventArgs e)
         {
-            var stock = Servidor.listaStock.FirstOrDefault(p => p.Producto == int.Parse(txt_codigo.Text) 
-                                                                        && p.Sucursal           == Configuracion.Sucursal 
-                                                                        && p.Color              == int.Parse(txt_color.Text) 
-                                                                        && p.Talle              == int.Parse(txt_talle.Text));
+            var stock = GestorBaseDeDatos.BuscarStock(int.Parse(txt_codigo.Text), (Modelo.Color)cmb_color.SelectedItem, (Talle)cmb_talle.SelectedItem, Configuracion.Sucursal);
             if (stock != null)
             {
-                var producto = Servidor.listaProductos.FirstOrDefault(e => e.Codigo == stock.Producto);
+                var producto = GestorBaseDeDatos.BuscarProducto(stock.Producto);
                 int cantidad = int.Parse(txt_cantidad.Text);
                 if (stock.Stock >= cantidad)
                 {
@@ -144,7 +136,7 @@ namespace TiendaIngSoft
 
         private void volverCliente(object sender, EventArgs e) {
             this.Show();
-            cliente = Servidor.listaClientes.FirstOrDefault(c => c.CUIT == int.Parse(txt_cuit.Text));
+            cliente = GestorBaseDeDatos.BuscarCliente(int.Parse(txt_cuit.Text));
             if (cliente == null)
             {
                 MessageBox.Show("Cliente no encontrado!");

@@ -7,7 +7,10 @@ namespace TiendaIngSoft
 {
     public class Configuracion
     {
-        public static int Sucursal = 1;
+        public static Sucursal Sucursal = new Sucursal() {
+            Codigo = 1,
+            Descripcion = "Centro"
+        };
         public static Usuario UsuarioActual = null;
     }
 }

@@ -28,7 +28,7 @@ namespace TiendaIngSoft
                 Descripcion = "Cinturon Gucci",
                 Costo = 500,
                 MargenGanancia = 10,
-                Marca = "Gucci",
+                Marca = 1,
                 NetoGravado = 550,
                 Precio = 550*1.21f,
             },
@@ -37,9 +37,20 @@ namespace TiendaIngSoft
                 Descripcion = "Camisa Taverniti",
                 Costo = 5000,
                 MargenGanancia = 10,
-                Marca = "Taverniti",
+                Marca = 2,
                 NetoGravado = 5500,
                 Precio = 5500*1.21f
+            }
+        };
+
+        public static List<Marca> listaMarcas = new List<Marca>() {
+            new Marca(){
+                Codigo = 1,
+                Descripcion = "Gucci"
+            },
+            new Marca(){
+                Codigo = 2,
+                Descripcion = "Taverniti"
             }
         };
 

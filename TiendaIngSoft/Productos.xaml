@@ -15,7 +15,7 @@
         <TextBox x:Name="txt_descripcion" HorizontalAlignment="Left" Margin="118,47,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="465"/>
         <TextBox x:Name="txt_costo" HorizontalAlignment="Left" Margin="118,109,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="233" PreviewTextInput="NumberValidationTextBox"/>
         <TextBox x:Name="txt_margenGanancia" HorizontalAlignment="Left" Margin="118,140,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="233" PreviewTextInput="NumberValidationTextBox"/>
-        <TextBox x:Name="txt_marca" HorizontalAlignment="Left" Margin="118,76,0,0" VerticalAlignment="Top" Width="233" />
+        <ComboBox x:Name="cmb_marca" HorizontalAlignment="Left" Margin="118,76,0,0" VerticalAlignment="Top" Width="233" />
         <ListView x:Name="dg_productos" Margin="10,224,634,10" KeyDown="dg_productos_KeyDown">
             <ListView.View>
                 <GridView>

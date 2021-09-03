@@ -34,7 +34,7 @@ namespace TiendaIngSoft
 
         public bool ConfirmarLogin(int legajo, string password) {
             foreach (var usuario in Servidor.listaUsuarios) {
-                if (usuario.Legajo == legajo && usuario.Password == password && usuario.Sucursal == Configuracion.Sucursal) {
+                if (usuario.Legajo == legajo && usuario.Password == password && usuario.Sucursal == Configuracion.Sucursal.Codigo) {
                     Configuracion.UsuarioActual = usuario;
                     return true;
                 }

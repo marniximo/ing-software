@@ -30,6 +30,8 @@ namespace TiendaIngSoft
             cmb_sucursal.DisplayMemberPath = "Descripcion";
             cmb_talle.ItemsSource = Servidor.listaTalles;
             cmb_talle.DisplayMemberPath = "Descripcion";
+            cmb_marca.ItemsSource = Servidor.listaMarcas;
+            cmb_marca.DisplayMemberPath = "Descripcion";
             refrescarStocks();
             refrescarProductos();
         }
@@ -46,7 +48,6 @@ namespace TiendaIngSoft
         }
 
         private void vaciarCamposProductos() {
-            txt_marca.Text = "";
             txt_descripcion.Text = "";
             txt_costo.Text = "";
             txt_margenGanancia.Text = "";
@@ -54,7 +55,7 @@ namespace TiendaIngSoft
 
         private void llenarCamposProductos()
         {
-            txt_marca.Text = productoSeleccionado.Marca;
+            cmb_marca.SelectedItem = productoSeleccionado.Marca;
             txt_descripcion.Text = productoSeleccionado.Descripcion;
             txt_costo.Text = productoSeleccionado.Costo.ToString();
             txt_margenGanancia.Text = productoSeleccionado.MargenGanancia.ToString();
@@ -64,33 +65,16 @@ namespace TiendaIngSoft
         {
             var porcentaje = float.Parse(txt_margenGanancia.Text);
             var costo = float.Parse(txt_costo.Text);
-            var neto = (1 + porcentaje / 100) * costo;
-            var precio = neto * (1 + Servidor.IVA_PORC);
+            var descripcion = txt_descripcion.Text;
+            var marca = cmb_marca.SelectedItem as Marca;
             if ((string)btn_okProductos.Content == "Crear")
             {
-                var ultimaEspecificacion = Servidor.listaProductos.LastOrDefault();
-                int codigo = ultimaEspecificacion == null ? 1 : ultimaEspecificacion.Codigo + 1;
-                var especificacion = new Producto()
-                {
-                    Codigo = codigo,
-                    Costo = float.Parse(txt_costo.Text),
-                    Descripcion = txt_descripcion.Text,
-                    Marca = txt_marca.Text,
-                    NetoGravado = neto,
-                    Precio = precio,
-                    MargenGanancia = porcentaje
-                };
-                Servidor.listaProductos.Add(especificacion);
+                GestorBaseDeDatos.AgregarProducto(descripcion, marca.Codigo, costo, porcentaje);
                 MessageBox.Show("Producto Creado!");
             }
             else
             {
-                productoSeleccionado.Marca = txt_marca.Text;
-                productoSeleccionado.Descripcion = txt_descripcion.Text;
-                productoSeleccionado.Costo = float.Parse(txt_costo.Text);
-                productoSeleccionado.NetoGravado = neto;
-                productoSeleccionado.Precio = precio;
-                productoSeleccionado.MargenGanancia = porcentaje;
+                GestorBaseDeDatos.ActualizarProducto(productoSeleccionado.Codigo, descripcion, marca.Codigo, costo, porcentaje);
                 btn_okProductos.Content = "Crear";
                 MessageBox.Show("Producto Actualizado!");
             }
@@ -110,30 +94,16 @@ namespace TiendaIngSoft
             var talle = cmb_talle.SelectedItem as Talle;
             var sucursal = cmb_sucursal.SelectedItem as Sucursal;
             var producto = int.Parse(txt_producto.Text);
-            var stock = Servidor.listaStock.FirstOrDefault(p => p.Producto == producto
-                                                                    && p.Sucursal == Configuracion.Sucursal
-                                                                    && p.Color == color.Codigo
-                                                                    && p.Talle == talle.Codigo);
+            var stock = GestorBaseDeDatos.BuscarStock(producto, color, talle, sucursal);
+            var cantidad = int.Parse(txt_cantidad.Text);
             if (stock == null)
             {
-                var ultimoStock = Servidor.listaStock.LastOrDefault();
-                int codigo = ultimoStock == null ? 1 : ultimoStock.Codigo + 1;
-
-                var lineaStock = new LineaStock()
-                {
-                    Codigo = codigo,
-                    Color = color.Codigo,
-                    Producto = producto,
-                    Stock = int.Parse(txt_cantidad.Text),
-                    Sucursal = sucursal.Codigo,
-                    Talle = talle.Codigo,
-                };
-                Servidor.listaStock.Add(lineaStock);
+                GestorBaseDeDatos.AgregarStock(producto, color, talle, cantidad, sucursal);
                 MessageBox.Show("Stock Creado!");
             }
             else
             {
-                stock.Stock += int.Parse(txt_cantidad.Text);
+                GestorBaseDeDatos.ModificarStock(cantidad, cantidad);
                 MessageBox.Show("Stock Actualizado!");
             }
             refrescarStocks();
@@ -150,8 +120,9 @@ namespace TiendaIngSoft
             else if(e.Key == Key.Delete && dg_productos.SelectedIndex >= 0)
             {
                 productoSeleccionado = dg_productos.SelectedItem as Producto;
-                Servidor.listaProductos.Remove(productoSeleccionado);
+                GestorBaseDeDatos.EliminarProducto(productoSeleccionado.Codigo);
                 productoSeleccionado = null;
+                MessageBox.Show("Producto Eliminado!");
                 refrescarProductos();
             }
         }
