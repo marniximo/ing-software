@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Modelo;
 
-namespace TiendaIngSoft
+namespace Modelo.Gestion
 {
     public static class Servidor
     {
@@ -131,7 +131,7 @@ namespace TiendaIngSoft
         public static List<Cliente> listaClientes = new List<Cliente>()
         {
             new Cliente(){
-                CUIT = 12345,
+                CUIT = "12345",
                 Domicilio = "mi casa",
                 RazonSocial = "marianoSA"
             }

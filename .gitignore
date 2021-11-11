@@ -6,3 +6,6 @@ Modelo/.vs
 TiendaIngSoft/obj/
 TiendaIngSoft/bin/
 TiendaIngSoft/.vs/
+TiendaIngSoft/packages/
+Tests/obj
+Tests/bin

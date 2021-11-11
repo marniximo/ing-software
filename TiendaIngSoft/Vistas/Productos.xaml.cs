@@ -1,4 +1,5 @@
 ﻿using Modelo;
+using Modelo.Gestion;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -69,12 +70,12 @@ namespace TiendaIngSoft
             var marca = cmb_marca.SelectedItem as Marca;
             if ((string)btn_okProductos.Content == "Crear")
             {
-                GestorBaseDeDatos.AgregarProducto(descripcion, marca.Codigo, costo, porcentaje);
+                GestionProductos.AgregarProducto(descripcion, marca.Codigo, costo, porcentaje);
                 MessageBox.Show("Producto Creado!");
             }
             else
             {
-                GestorBaseDeDatos.ActualizarProducto(productoSeleccionado.Codigo, descripcion, marca.Codigo, costo, porcentaje);
+                GestionProductos.ActualizarProducto(productoSeleccionado.Codigo, descripcion, marca.Codigo, costo, porcentaje);
                 btn_okProductos.Content = "Crear";
                 MessageBox.Show("Producto Actualizado!");
             }
@@ -94,16 +95,16 @@ namespace TiendaIngSoft
             var talle = cmb_talle.SelectedItem as Talle;
             var sucursal = cmb_sucursal.SelectedItem as Sucursal;
             var producto = int.Parse(txt_producto.Text);
-            var stock = GestorBaseDeDatos.BuscarStock(producto, color, talle, sucursal);
+            var stock = GestionStock.BuscarStock(producto, color, talle, sucursal);
             var cantidad = int.Parse(txt_cantidad.Text);
             if (stock == null)
             {
-                GestorBaseDeDatos.AgregarStock(producto, color, talle, cantidad, sucursal);
+                GestionStock.AgregarStock(producto, color, talle, cantidad, sucursal);
                 MessageBox.Show("Stock Creado!");
             }
             else
             {
-                GestorBaseDeDatos.ModificarStock(cantidad, cantidad);
+                GestionStock.ModificarStock(cantidad, cantidad);
                 MessageBox.Show("Stock Actualizado!");
             }
             refrescarStocks();
@@ -120,7 +121,7 @@ namespace TiendaIngSoft
             else if(e.Key == Key.Delete && dg_productos.SelectedIndex >= 0)
             {
                 productoSeleccionado = dg_productos.SelectedItem as Producto;
-                GestorBaseDeDatos.EliminarProducto(productoSeleccionado.Codigo);
+                GestionProductos.EliminarProducto(productoSeleccionado.Codigo);
                 productoSeleccionado = null;
                 MessageBox.Show("Producto Eliminado!");
                 refrescarProductos();

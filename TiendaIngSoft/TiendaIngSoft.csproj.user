@@ -6,35 +6,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
   </ItemGroup>
-  <ItemGroup>
-    <Compile Update="Clientes.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Principal.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Productos.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Ventas.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Update="Clientes.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Login.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Principal.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Productos.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Ventas.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup />
 </Project>

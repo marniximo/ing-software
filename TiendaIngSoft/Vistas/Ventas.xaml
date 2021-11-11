@@ -40,13 +40,7 @@
         <Label x:Name="label1_Copy2" Content="Cantidad" HorizontalAlignment="Left" Margin="274,131,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txt_cantidad" HorizontalAlignment="Left" Margin="414,135,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="405"/>
         <Label x:Name="label1_Copy3" Content="Condicion tributaria" HorizontalAlignment="Left" Margin="274,162,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="cb_condicionTributaria" HorizontalAlignment="Left" Margin="414,166,0,0" Text="" VerticalAlignment="Top" Width="405" SelectedIndex="0">
-            <System:String>CF</System:String>
-            <System:String>RI</System:String>
-            <System:String>M</System:String>
-            <System:String>E</System:String>
-            <System:String>NR</System:String>
-        </ComboBox>
+        <ComboBox x:Name="cmb_condicionTributaria" HorizontalAlignment="Left" Margin="414,166,0,0" Text="" VerticalAlignment="Top" Width="405" SelectedIndex="0" />
         <Label x:Name="label1_Copy4" Content="CUIT" HorizontalAlignment="Left" Margin="274,193,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txt_cuit" HorizontalAlignment="Left" Margin="414,197,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="405" PreviewTextInput="NumberValidationTextBox"/>
 
